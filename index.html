@@ -13,7 +13,7 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css" id="theme">
 
@@ -71,9 +71,13 @@
 					</section>
 					<section>
 						<p>Composer is the PHP package manager allowing developers to lock dependencies together.</p>
+						<small><em>I say "the" because PEAR has been deemed dead.</em></small>
 					</section>
 					<section>
 						<p>It allows developers across the world to pull in the same packages and libraries at the same version.</p>
+						<p>All with a simple command from the command line.</p>
+						<h4><pre><code contenteditable class ="command-line">mtrask@Matts-MacBook-Pro-2 ‹ refactor3 ↑ › composer install</code></pre> </h4>
+						<small><em>Don't be alarmed, this is just an Oh-My-Zsh theme I use. Its called 'mortalscumbag' if you are curious.</em></small>
 					</section>
 					<section>
 						<p>Through <a href="https://packagist.com">Packagist</a>, developers can browse thousands of packages to pull into an app to build it up.</p>
@@ -103,9 +107,8 @@
 								<li>Laravel/Laravel</li>
 								<li>Slim/Slim</li>
 								<li>CakePHP/CakePHP</li>
-						<ul>
+						</ul>
 					</section>
-
 				</section>
 				<section>
 					<section>
@@ -114,7 +117,7 @@
 						<p class="fragment">The .lock file hard locks your dependencies once you run composer install.</p>
 					</section>
 					<section>
-						<p>If you run <pre><code contenteditable class ="command-line">composer install</code></pre> it will:
+						<p>If you run <pre><code contenteditable class ="command-line">mtrask@Matts-MacBook-Pro-2 : ~ [0] % composer install</code></pre> it will:
 							<ul>
 								<li>Check if a composer.lock exists</li>
 								<li>If not, perform a composer update to create one</li>
@@ -123,7 +126,7 @@
 						</p>
 					</section>
 					<section>
-						<p>If you run <pre><code contenteditable class ="command-line">composer update</code></pre> it will:
+						<p>If you run <pre><code contenteditable class ="command-line">mtrask@Matts-MacBook-Pro-2 : ~ [0] % composer update</code></pre> it will:
 							<ul>
     							<li>Check composer.json</li>
     							<li>Determine the latest versions to install based on your version specs</li>
@@ -135,6 +138,92 @@
 				<section>
 					<p>Having a composer.lock file also ensures consistency across clusters of servers, if you’re running Composer separately on each machine. It enables you to spin up new instances weeks, or months later, without being concerned about dependency mismatch. - Davey Shafik</p>
 				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Anatomy of Composer.json</h2>
+					<p>Composer.json for a personal project vs Composer.json for a library</p>
+				</section>
+				<section>
+					<p>Personal/Company Project</p>
+					<pre><code>
+{
+    "name": "ElephpantsAreRad.com",
+    "authors": [
+        {
+            "name": "Matt Trask",
+            "email": "mjftrask@gmail.com",
+            "homepage": "matthewtrask.net"
+        }
+    ],
+    "license": "BSD 2-Clause"
+    "require": {
+        "slim/slim": "3.0.0-RC2",
+        "react/http": "dev-master",
+        "slim/views": "0.9.*",
+        "twig/twig": "1.21.3",
+        "slim/pdo":  "",
+        "monolog/monolog": ">=1.0.*", || <- >= 1.0 < 2.0
+        "ramsey/uuid": "~1.3" || <- >= 1.3 AND < 2.0
+    },
+    "require-dev": {
+        "sebastian/phpunit": "5.0.0",
+        "mockery/mockery": ">=2.0"
+    }
+
+}
+					</code></pre>
+				</section>
+				<section>
+					<p>Libraries/Frameworks</p>
+					<pre><code>
+						{
+    "name": "phergie/phergie-irc-client-react",
+    "description": "IRC client library built on React",
+    "keywords": [ "irc", "client", "react" ],
+    "license": "BSD-2-Clause",
+    "support": {
+        "email": "team@phergie.org",
+        "irc": "irc://irc.freenode.net/phergie",
+        "issues": "https://github.com/phergie/phergie-irc-client-react/issues",
+        "source": "https://github.com/phergie/phergie-irc-client-react"
+    },
+    "require": {
+        "php": ">=5.4.2",
+        "phergie/phergie-irc-parser": "~2.0",
+        "phergie/phergie-irc-generator": "~1.5",
+        "phergie/phergie-irc-connection": "~2.0",
+        "react/event-loop": "~0.4.0",
+        "react/stream": "~0.4.2",
+        "react/socket-client": "~0.4.2",
+        "react/dns": "~0.4.0",
+        "react/promise": "~2.0",
+        "psr/log": "~1.0",
+        "monolog/monolog": "~1.6"
+    },
+    "require-dev": {
+        "phergie/phergie-irc-bot-react-development": "~1.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Phergie\\Irc\\Client\\React\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Phergie\\Irc\\Tests\\Client\\React\\": "tests"
+        }
+    }
+}</code></pre>
+				</section>
+			</section>
+			<section>
+				<h2>Final Thoughts/Questions</h2>
+				<p>Ask away!</p>
+				<p><i class="fa fa-github"></i> Github.com/rocketpastsix</p>
+				<p><i class="fa fa-twitter"></i> twitter.com/matthewtrask</p>
+				<p><i class="fa fa-hashtag"></i> irc: matthewtrask</p>
+			</section>
 
 
 
